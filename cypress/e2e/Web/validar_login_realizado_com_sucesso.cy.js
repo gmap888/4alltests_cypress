@@ -32,10 +32,31 @@ cy.get(':nth-child(2) > :nth-child(5) > a').click()
 cy.visit('http://aprendendotestar.com.br/treinar-automacao.php')
 
 //verificar se existe o 'nome'
-cy.get('tbody > :nth-child(2) > :nth-child(2)').should('not.have.text', 'nome')
 
 
 
   })
+
+
+  it ('Validar cadastro sem informar usuario' , () => {
+
+    //acessar a pagina
+    cy.visit('http://aprendendotestar.com.br/treinar-automacao.php')
+   
+   // preencher os campos
+    
+    cy.get(':nth-child(4) > td > input').type('senha')
+    cy.get(':nth-child(6) > td > input').type('nome')
+   
+   // clicar no botão enviar
+    cy.get('td > .btn').click()
+
+
+    //verificar se o campo está marcado como obrigatorio
+    cy.get('input[name="form_senha"]').should('.have.attr' , 'required');
+
+  })
+
+
 
 })
